@@ -15,7 +15,7 @@ flowchart TB
     controls -. Optional import .-> exposure
     inventory -. Optional import .-> exposure
     edge["Source: CDN, load balancer, or proxy logging destination"] -->|Import access log export| exposure
-    exposure --> report["Output: edge traffic report and coverage gaps"]
+    exposure --> report["Output: edge traffic evidence bundle and report"]
     linkStyle default stroke:#64748b,stroke-width:2px
 ```
 
@@ -107,15 +107,20 @@ flowchart TB
 
 [Mermaid source](_references/diagrams/06-tool-boundaries-and-evidence/02-cli-wrapper-by-analysis-perspective.mmd)
 
-| Proposed command | Responsibility |
-| --- | --- |
-| `pensys internal routes` | Map source or route exports to handlers. |
-| `pensys internal ingress` | Review deployed ingress configuration. |
-| `pensys internal origin` | Review configured origin controls. |
-| `pensys internal traffic` | Summarize operator-side access logs and correlate them with available evidence. |
-| `pensys external visibility` | Review public DNS, certificate records, and client-visible evidence for owned assets. |
-| `pensys external reachability` | Review approved connectivity evidence from a specified public network, VPN, or service context. |
-| `pensys evidence validate` and `pensys evidence diff` | Validate and compare bundles from either perspective. |
+| Command | Status | Main input | Output |
+| --- | --- | --- | --- |
+| `pensys internal routes` | Planned | Source or route export | Route evidence bundle |
+| `pensys internal ingress` | Planned | Configuration export and intended paths | Ingress evidence bundle |
+| `pensys internal origin` | Planned | Origin settings and caller policy | Origin assessment bundle |
+| `pensys internal traffic` | Planned | Access logs and optional supporting bundles | Traffic evidence bundle and report |
+| `pensys external visibility` | Proposed | Client-visible records from an owned scope | Visibility evidence bundle |
+| `pensys external reachability` | Proposed | Approved client connectivity evidence | Reachability evidence bundle |
+| `pensys evidence validate` | Planned first | Bundle or bundle set | Validation results |
+| `pensys evidence diff` | Planned first | Comparable bundles | Changes and coverage gaps |
+| `pensys evidence trace <bundle-id> <record-id>` | Planned later | Record citation and available bundles | Cited records and missing inputs |
+| `pensys evidence evaluate` | Proposed | Evaluation profile and bundles | Scores, coverage, and follow-up decisions |
+| `pensys evidence link` | Proposed | Two scoped references and an explanation | Relationship record |
+| `pensys review` | Proposed | Operator and client evidence bundles | Combined review report |
 
 Edge Traffic Review correlates operator-side logs with available route, ingress, and origin evidence. A **suite-level `pensys review`** could also combine separately supplied client observations with those bundles.[^candidates] Edge logs are operator-side evidence of client traffic. Record the evidence source and observation context so a report can distinguish an operator's log from what a client received.
 
@@ -259,7 +264,7 @@ Share raw snapshots explicitly in the manifest. Keep assessments and coverage wi
 
 Use UUIDv7 for newly created workspace, snapshot, run, and evidence bundle IDs. Independent tools can generate these IDs locally, and workspaces can share or import artifacts without coordinating a counter. Use the canonical lowercase, hyphenated string for serialized IDs and generated folder names. Preserve existing IDs on import. Keep human-readable workspace names and labels in their manifests.
 
-Evidence references continue to use a bundle ID and a bundle-local record ID. For Diff and the coverage ledger, compare a stable subject and review question within the same scope. A generated artifact ID identifies one artifact and will change on a new run. Use recorded timestamps when interpreting chronology across hosts.
+Evidence references continue to use a bundle ID and a bundle-local record ID. For the coverage ledger, use a stable subject and review question within the same scope. V1 lacks review-question IDs. [Evidence Diff](_tools/evidence-diff/README.md) uses conservative matching and reports unmatched or ambiguous records. A generated artifact ID identifies one artifact and will change on a new run. Use recorded timestamps when interpreting chronology across hosts.
 
 The numbered folder names above are illustrative. Apply UUIDv7 to new artifacts through a shared generation convention. Keep v1 readers compatible with existing example IDs. [RFC 9562: UUID version 7](https://www.rfc-editor.org/rfc/rfc9562.html#name-uuid-version-7)
 

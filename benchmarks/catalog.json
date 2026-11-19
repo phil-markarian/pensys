@@ -16,7 +16,7 @@
       "status": "scaffolded",
       "definition": "apps/gitea/README.md",
       "planned_questions": [
-        "Can the review connect application routes, ingress configuration, and edge traffic?",
+        "Can the review connect documented API operations, ingress configuration, and edge traffic?",
         "Can it explain a deliberate repository access policy change?"
       ]
     },

@@ -20,8 +20,8 @@ flowchart TB
 
 | Part | Inputs | Output |
 | --- | --- | --- |
-| Lean policy model | Labeled cases and a written policy for reading a tenant-owned invoice. Define the actor, action, resource, tenant, and any permitted exception. | An executable allow/deny decision and a proof that a cross-tenant read requires an explicit exception in the model. |
-| Application comparison | Lean decisions and existing application regression results keyed by case ID and revision. Use the shared case and observation format below. | Matches, mismatches, or unresolved cases when application evidence is missing or incompatible. |
+| Lean policy model | Unlabeled requests and a written policy for reading a tenant-owned invoice. Define the actor, action, resource, tenant, and any permitted exception. | An executable allow/deny decision and a proof that a cross-tenant read requires an explicit exception in the model. |
+| Application comparison | Independent policy labels, Lean decisions, and existing application regression results keyed by case ID and revision. Use the shared case and observation format below. | Matches, mismatches, or unresolved cases when application evidence is missing or incompatible. |
 
 ## Portable cases and adapters
 
@@ -88,12 +88,16 @@ benchmarks/
       deployment/
       fixtures/
 schema/
-  fixtures/
+  evidence-bundle/
+    schema.json  # Link to the current major
+    v1/
+      schema.json
+      fixtures/
 tests/
   integration/
 ```
 
-Keep benchmark definitions, pinned deployment configuration, synthetic seed data, expected outcomes, and scoring profiles in each benchmark folder. Keep one profile at the root of each benchmark. Use the [benchmark catalog](../benchmarks/catalog.json) to find each definition. Add further subfolders only when needed. Keep unit tests with their owning packages and use root `tests/integration/` for cross-package checks. Keep minimal interchange examples in [`schema/fixtures/`](../schema/README.md).
+Keep benchmark definitions, pinned deployment configuration, synthetic seed data, expected outcomes, and scoring profiles in each benchmark folder. Keep one profile at the root of each benchmark. Use the [benchmark catalog](../benchmarks/catalog.json) to find each definition. Add further subfolders only when needed. Keep unit tests with their owning packages and use root `tests/integration/` for cross-package checks. Keep minimal interchange examples beside each [schema release](../schema/README.md#release-layout).
 
 Write collected snapshots, logs, evidence bundles, and evaluation results to a [Pensys workspace](06-tool-boundaries-and-evidence.md#example-workspace-layout). Commit small sanitized inputs or golden outputs only when they are part of a reproducible fixture. Reusable models and harness code belong in their owning packages when they have a second caller. Benchmark-only entry points can live alongside their cases.
 

@@ -2,7 +2,7 @@
 
 **Design status: planned.**[^tool-status]
 
-Compare compatible evidence from two runs and report what changed in observations, assessments, and coverage. Use comparable scope and stable subject identifiers to match records across runs.
+Compare compatible evidence from two runs and report what changed in observations, assessments, and coverage. Compare bundles within the same project and environment. For v1, match observations by exact subject and kind, and assessments by exact subject and claim, only when each key is unique on both sides and the producer and review context are comparable. Bundle-local record IDs are citation targets.
 
 ```mermaid
 flowchart LR
@@ -16,7 +16,7 @@ flowchart LR
 
 Use the shared Evidence Validate library to check inputs before comparison.
 
-If a finding disappears and the current run lacks its input, report it as no longer evaluable. A resolution requires evidence from the current run.
+Report unmatched or ambiguous records explicitly. If scope, freshness, or comparable inputs cannot be established, leave the comparison unresolved. Report a result as no longer evaluable when required inputs disappear. A resolution requires evidence from the current run.
 
 See [Shared evidence schema](../../../schema/README.md) and [Evidence Validate](../evidence-validate/README.md).
 

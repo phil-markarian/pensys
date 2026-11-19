@@ -15,7 +15,7 @@ flowchart LR
 
 [Mermaid source](../../_references/diagrams/review-log/01-overview.mmd)
 
-## What the package owns
+## Artifact ownership
 
 | Output | Purpose | Example |
 | --- | --- | --- |

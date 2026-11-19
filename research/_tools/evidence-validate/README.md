@@ -14,7 +14,7 @@ flowchart LR
 
 [Mermaid source](../../_references/diagrams/evidence-validate/01-overview.mmd)
 
-Expose the validation checks as a library for Evidence Diff and Trace.
+Expose the validation checks as a library for Evidence Diff and Trace. Assert RFC 3339 timestamp formats explicitly and verify checker availability. Test both valid and malformed timestamp fixtures in each supported runtime.
 
 If an Origin Review bundle cites an Ingress Review record and the ingress bundle is absent, report the missing bundle. If the bundle is supplied but lacks the cited record, report a broken reference.
 

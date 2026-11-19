@@ -13,7 +13,7 @@ flowchart LR
     ingress["Optional input: topology from Ingress Review"] -.-> review
     origin["Optional input: assessments from Origin Review"] -.-> review
     routes["Optional input: Route Mapper bundle or local manifest"] -.-> review
-    review --> report["Output: edge traffic report and coverage gaps"]
+    review --> report["Output: edge traffic evidence bundle and report"]
     linkStyle default stroke:#64748b,stroke-width:2px
 ```
 
@@ -32,7 +32,9 @@ flowchart LR
 
 Start with a local route manifest and log exports. **First cloud adapter: open.**[^adapter] AWS is a candidate for an AWS deployment. The input model should also support other providers, self-managed reverse proxy logs, and future honeypot summaries. Preserve provider and resource identifiers, log coverage windows, and route matching uncertainty.
 
-## First review report
+## Evidence bundle and review report
+
+Write a versioned evidence bundle with cited traffic observations, supported assessments, and coverage. Render the human-readable report from that bundle.
 
 For each noteworthy request pattern, show the environment, edge, method, observed request path, matched application route if known, count, time window, response evidence, and owner if known. A successful HTTP status alone leaves open what the response contained. Report possible unintended exposure separately from confirmed configuration findings and missing telemetry. Aggregate events without retaining request bodies, credentials, or query values by default.
 

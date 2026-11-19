@@ -41,6 +41,18 @@ The same distinction applies to a service access log. A zero count in a sampled 
 | Log and telemetry review | What the configured source recorded over a known window. | How sampling, filtering, and missing telemetry limit conclusions. |
 | Formal verification | Whether a stated property holds for the model under its assumptions. | How the implementation corresponds to the model and which real-world conditions it leaves out. |
 
+## Worked lesson: two exports, one source
+
+| Step | Record |
+| --- | --- |
+| Question | Does comparing an advertised REST index with the registered routes establish inventory completeness? |
+| Evidence | The public index derives its entries from the registered route map. [WordPress index implementation](https://developer.wordpress.org/reference/classes/wp_rest_server/get_index/) |
+| Limitation | Both exports share a source. They cannot independently account for routes observed at other layers. |
+| Decision | Use the comparison to check visibility, scope, and import behavior. Keep broader web-surface coverage unresolved. |
+| Follow-up check | Compare the core and plugin snapshots and verify that the report explains which source accounts for each change. **Benchmark pending.**[^benchmark] |
+
+[^benchmark]: The [WordPress benchmark](../benchmarks/apps/wordpress/README.md) defines this check. Runnable inputs and results are pending.
+
 See [Defensive security analysis research](07-defensive-analysis-research.md) for primary studies and [Evidence Evaluate](_tools/evidence-evaluate/README.md) for the proposed feedback workflow.
 
 For the suite’s terminology and reporting conventions, see [Pensys glossary](glossary.md) and [Evidence readiness](06-tool-boundaries-and-evidence.md#evidence-readiness).
