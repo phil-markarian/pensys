@@ -143,6 +143,8 @@ Show the review question, source, covered scope and time window, missing fields 
 
 Validate and Diff are the first shared commands. They operate on evidence bundles from any package. A later `pensys evidence trace <assessment-id>` command will follow citations and show which inputs are missing.
 
+**Evidence Evaluate** is a proposed shared command for scoring review outcomes against an evaluation profile and recording decisions about what to improve.[^candidates] [Evidence Evaluate design](_tools/evidence-evaluate/README.md)
+
 ## Review workspace
 
 Use a local project manifest to record review scope, expected policies, and paths to inputs and evidence bundles. The suite wrapper uses it to reopen a review, render existing results, or run selected packages with the same scope. Start with file references. Add archive export when a review needs to be handed off as a single file.
@@ -305,8 +307,6 @@ Invocation capture and the choice between pinned inputs and fresh collection are
 To add material to a snapshot, create a derived snapshot with a new UUIDv7. Record its parent, added files, and any explicit overrides used by the new review. Preserve the source, scope, and collection time of each input. For example, extend a Django route listing with an OpenAPI export and rerun Route Mapper using the derived snapshot. The earlier snapshot still reproduces the earlier review.
 
 Store personal workflows under a workspace's `workflows/` folder. Put reusable templates under `shared/workflows/` and keep workflow run records in the workspace that executed them.
-
-**Evidence Evaluate** is a proposed shared command for scoring review outcomes against an evaluation profile and recording decisions about what to improve.[^candidates] [Evidence Evaluate design](_tools/evidence-evaluate/README.md)
 
 ## Candidate entry points
 

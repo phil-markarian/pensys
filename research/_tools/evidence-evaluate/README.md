@@ -13,14 +13,14 @@ flowchart LR
 
 [Mermaid source](../../_references/diagrams/evidence-evaluate/01-overview.mmd)
 
-| Responsibility | Owner |
+| Responsibility | Planned command |
 | --- | --- |
 | Check structure, references, and scope | [Evidence Validate](../evidence-validate/README.md) |
 | Show changes between compatible runs | [Evidence Diff](../evidence-diff/README.md) |
 | Follow citations to their sources | [Evidence Trace](../../06-tool-boundaries-and-evidence.md#next-shared-commands) |
 | Judge whether results meet independent expectations and record reviewer effort | Evidence Evaluate |
 
-An evaluation profile names the review questions, compatible scope, scoring rules, and labeled examples where available. Save the profile revision, input bundle IDs, reviewer feedback, and resulting decision in a new run. Keep a manual review or prior workflow as a baseline when comparing approaches. Mark cases without independent labels as unscored. Keep coverage and reviewer effort visible for those cases.
+An evaluation profile names the review questions, compatible scope, scoring rules, and labeled examples where available. Save the profile revision, input bundle IDs, reviewer feedback, and resulting decision in a new run. Keep a manual review or prior workflow as a baseline when comparing approaches. Score an unresolved outcome when the independent expectation is that the evidence is insufficient. Mark cases without independent expectations as unscored. Report the scoring denominator, coverage, and reviewer effort so unresolved or unscored cases remain visible.
 
 ### Manual policy evaluation
 
