@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "bundle_id": "example-origin",
+  "run_id": "example-origin-run",
+  "producer": { "name": "origin-review", "version": "0.1.0" },
+  "project": "example-app",
+  "environment": "staging",
+  "generated_at": "2026-11-19T12:05:00Z",
+  "observations": [],
+  "assessments": [
+    {
+      "id": "edge-identity",
+      "subject": "origin:example-app",
+      "claim": "The origin restricts public forwarding to the intended edge distribution.",
+      "status": "unresolved",
+      "blocker": "The export omits the origin's edge identity configuration.",
+      "evidence": [
+        { "bundle_id": "example-ingress", "record_id": "origin-network-filter" }
+      ]
+    }
+  ],
+  "coverage": [
+    { "subject": "origin:example-app", "input": "origin edge identity settings", "status": "missing" }
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Evidence bundle v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "bundle_id", "run_id", "producer", "project", "environment", "generated_at", "observations", "assessments", "coverage"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "bundle_id": { "$ref": "#/$defs/text" },
+    "run_id": { "$ref": "#/$defs/text" },
+    "producer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "version"],
+      "properties": {
+        "name": { "$ref": "#/$defs/text" },
+        "version": { "$ref": "#/$defs/text" }
+      }
+    },
+    "project": { "$ref": "#/$defs/text" },
+    "environment": { "$ref": "#/$defs/text" },
+    "generated_at": { "type": "string", "format": "date-time" },
+    "observations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "kind", "subject", "value", "source", "observed_at"],
+        "properties": {
+          "id": { "$ref": "#/$defs/text" },
+          "kind": { "$ref": "#/$defs/text" },
+          "subject": { "$ref": "#/$defs/text" },
+          "value": true,
+          "source": { "$ref": "#/$defs/text" },
+          "observed_at": { "type": "string", "format": "date-time" }
+        }
+      }
+    },
+    "assessments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "subject", "claim", "status", "evidence"],
+        "properties": {
+          "id": { "$ref": "#/$defs/text" },
+          "subject": { "$ref": "#/$defs/text" },
+          "claim": { "$ref": "#/$defs/text" },
+          "status": { "enum": ["supported", "mismatch", "unresolved"] },
+          "blocker": { "$ref": "#/$defs/text" },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["bundle_id", "record_id"],
+              "properties": {
+                "bundle_id": { "$ref": "#/$defs/text" },
+                "record_id": { "$ref": "#/$defs/text" }
+              }
+            }
+          }
+        },
+        "if": { "properties": { "status": { "const": "unresolved" } }, "required": ["status"] },
+        "then": { "required": ["blocker"] },
+        "else": { "properties": { "evidence": { "minItems": 1 }, "blocker": false } }
+      }
+    },
+    "coverage": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["subject", "input", "status"],
+        "properties": {
+          "subject": { "$ref": "#/$defs/text" },
+          "input": { "$ref": "#/$defs/text" },
+          "status": { "enum": ["reviewed", "missing", "unsupported", "out_of_scope"] },
+          "detail": { "$ref": "#/$defs/text" }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "text": { "type": "string", "minLength": 1 }
+  }
+}

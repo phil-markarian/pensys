@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "bundle_id": "example-ingress",
+  "run_id": "example-ingress-run",
+  "producer": { "name": "ingress-review", "version": "0.1.0" },
+  "project": "example-app",
+  "environment": "staging",
+  "generated_at": "2026-11-19T12:00:00Z",
+  "observations": [
+    {
+      "id": "origin-network-filter",
+      "kind": "network_filter",
+      "subject": "origin:example-app",
+      "value": { "allowed_source": "shared-edge-provider-address-range" },
+      "source": "example-ingress-export.json#/origin/network_filter",
+      "observed_at": "2026-11-19T11:55:00Z"
+    }
+  ],
+  "assessments": [],
+  "coverage": [
+    { "subject": "origin:example-app", "input": "origin network filter", "status": "reviewed" }
+  ]
+}
