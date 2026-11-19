@@ -1,0 +1,6 @@
+flowchart LR
+    principal["Anonymous caller, user, or service identity"] --> request["Requested action and resource"]
+    request --> policy["Application checks policy"]
+    policy -->|Permitted| allow["Action allowed"]
+    policy -->|Outside policy| deny["Access denied"]
+    linkStyle default stroke:#64748b,stroke-width:2px

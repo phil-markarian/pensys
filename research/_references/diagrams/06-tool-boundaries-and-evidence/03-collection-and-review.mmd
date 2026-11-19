@@ -1,0 +1,8 @@
+flowchart LR
+    source["Source: provider API, log destination, or local checkout"] --> collect["Collect: read inputs"]
+    collect --> snapshot["Output: native files and snapshot manifest"]
+    snapshot --> review["Review: analyze inputs offline"]
+    export["Input: existing export"] --> review
+    policy["Optional input: operator policy from workspace"] -.-> review
+    review --> bundle["Output: versioned evidence bundle with source citations"]
+    linkStyle default stroke:#64748b,stroke-width:2px

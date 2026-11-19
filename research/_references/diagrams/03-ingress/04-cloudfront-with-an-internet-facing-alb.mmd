@@ -1,0 +1,4 @@
+flowchart LR
+    client2["Internet client"] --> cf2["CloudFront"]
+    cf2 -->|Managed prefix list and secret header| restricted["Restricted ALB listener"]
+    linkStyle default stroke:#64748b,stroke-width:2px

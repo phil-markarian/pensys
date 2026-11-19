@@ -1,0 +1,5 @@
+flowchart LR
+    client["Internet client"] --> proxy["Public reverse proxy"]
+    proxy -->|Private network or WireGuard tunnel| control["Backend listener or firewall"]
+    control --> app["Application origin"]
+    linkStyle default stroke:#64748b,stroke-width:2px

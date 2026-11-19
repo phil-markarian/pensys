@@ -1,0 +1,4 @@
+flowchart LR
+    client["Internet client"] --> afd["Azure Front Door"]
+    afd -->|Backend service tag and Front Door profile ID| origin["Restricted public origin"]
+    linkStyle default stroke:#64748b,stroke-width:2px

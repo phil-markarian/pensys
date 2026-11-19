@@ -1,0 +1,4 @@
+flowchart LR
+    client["Internet client"] --> afd["Azure Front Door Premium"]
+    afd -->|Private Link| origin["Supported private origin"]
+    linkStyle default stroke:#64748b,stroke-width:2px

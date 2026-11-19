@@ -1,0 +1,9 @@
+flowchart LR
+    provider["Source: provider or proxy origin settings"] --> collect["Collect: read-only adapter"]
+    collect --> snapshot["Input: origin settings snapshot and manifest"]
+    snapshot --> review["Review: evaluate origin controls"]
+    export["Source: existing origin settings export"] --> review
+    policy["Input: operator policy for allowed callers"] --> review
+    ingress["Optional input: topology from Ingress Review"] -.-> review
+    review --> output["Output: origin assessment and coverage bundle"]
+    linkStyle default stroke:#64748b,stroke-width:2px

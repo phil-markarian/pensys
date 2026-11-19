@@ -1,0 +1,6 @@
+flowchart LR
+    adapter["Source: producing tool adapter"] --> observation["Input: observation with source reference"]
+    observation --> assessment["Output: assessment citing evidence"]
+    coverage["Input: coverage records from review runs"] --> assessment
+    assessment --> consumer["Downstream reviewer"]
+    linkStyle default stroke:#64748b,stroke-width:2px

@@ -1,0 +1,4 @@
+flowchart LR
+    client["Internet client"] --> cdn["Fastly edge"]
+    cdn -->|Mutual TLS| origin["Origin verifies Fastly client certificate"]
+    linkStyle default stroke:#64748b,stroke-width:2px

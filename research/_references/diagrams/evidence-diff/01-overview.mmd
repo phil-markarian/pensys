@@ -1,0 +1,5 @@
+flowchart LR
+    before["Input: baseline bundle from an earlier run"] --> compare["Compare records and coverage"]
+    after["Input: bundle from the current run"] --> compare
+    compare --> report["Output: evidence changes and coverage gaps"]
+    linkStyle default stroke:#64748b,stroke-width:2px

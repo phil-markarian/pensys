@@ -1,0 +1,5 @@
+flowchart LR
+    mount["Input: parent mount /api from application source"] --> resolve["Resolve full route template"]
+    route["Input: child registration GET /invoices"] --> resolve
+    resolve --> output["Output: route record GET /api/invoices"]
+    linkStyle default stroke:#64748b,stroke-width:2px

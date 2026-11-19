@@ -1,0 +1,5 @@
+flowchart LR
+    caller["Internet client, VPN user, or service"] --> gate["Listener and network rules"]
+    gate -->|Allowed path| target["Gateway or application"]
+    gate -->|Denied path| blocked["Connection blocked"]
+    linkStyle default stroke:#64748b,stroke-width:2px

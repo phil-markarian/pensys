@@ -1,0 +1,4 @@
+flowchart LR
+    edge["Azure Front Door"] -->|Backend service tag| net["Origin network filter"]
+    net -->|Expected Front Door profile ID| origin["Origin accepts the request"]
+    linkStyle default stroke:#64748b,stroke-width:2px

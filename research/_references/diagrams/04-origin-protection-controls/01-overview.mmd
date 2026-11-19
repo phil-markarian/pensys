@@ -1,0 +1,6 @@
+flowchart LR
+    client["Internet client"] --> edge["Public edge or proxy"]
+    edge --> control["Origin access control"]
+    control --> origin["Application origin"]
+    client -. Direct public request .-> blocked["Blocked or unreachable"]
+    linkStyle default stroke:#64748b,stroke-width:2px

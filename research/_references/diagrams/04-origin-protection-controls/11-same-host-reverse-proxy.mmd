@@ -1,0 +1,4 @@
+flowchart LR
+    client["Internet client"] --> proxy["Public reverse proxy"]
+    proxy -->|Loopback| app["Local app listener"]
+    linkStyle default stroke:#64748b,stroke-width:2px

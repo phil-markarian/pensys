@@ -1,0 +1,4 @@
+flowchart LR
+    edge["Cloudflare proxy"] -->|Client certificate over TLS| gate["Origin verifies client certificate"]
+    gate --> app["Application origin"]
+    linkStyle default stroke:#64748b,stroke-width:2px

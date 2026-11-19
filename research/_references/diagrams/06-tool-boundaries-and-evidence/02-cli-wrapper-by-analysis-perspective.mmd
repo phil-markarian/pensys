@@ -1,0 +1,10 @@
+flowchart TB
+    internalSource["Source: application checkout or deployed configuration"]
+    externalSource["Source: client observations from a declared network"]
+    internalSource -->|Import source or configuration export| internal["pensys internal"]
+    externalSource -->|Import observation export| external["pensys external"]
+    internal --> bundles["Output: versioned evidence bundle"]
+    external --> bundles
+    bundles -->|Import saved bundles| evidence["pensys evidence: validate or diff"]
+    evidence --> report["Output: validation results or changes"]
+    linkStyle default stroke:#64748b,stroke-width:2px

@@ -1,0 +1,5 @@
+flowchart LR
+    client["Internet client"] --> lb["External Application Load Balancer"]
+    lb -->|Serverless network endpoint group| run["Cloud Run service"]
+    client -. Request to default service URL .-> policy["Public direct access blocked by Cloud Run ingress policy"]
+    linkStyle default stroke:#64748b,stroke-width:2px

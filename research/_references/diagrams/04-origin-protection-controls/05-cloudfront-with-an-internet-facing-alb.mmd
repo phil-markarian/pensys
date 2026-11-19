@@ -1,0 +1,4 @@
+flowchart LR
+    edge["CloudFront"] -->|Managed prefix list| alb["ALB security group"]
+    alb -->|Required secret header| listener["ALB listener forwards to backend"]
+    linkStyle default stroke:#64748b,stroke-width:2px

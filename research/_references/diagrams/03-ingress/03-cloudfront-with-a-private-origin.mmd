@@ -1,0 +1,4 @@
+flowchart LR
+    client1["Internet client"] --> cf1["CloudFront"]
+    cf1 -->|VPC origin| private["Private ALB or EC2"]
+    linkStyle default stroke:#64748b,stroke-width:2px

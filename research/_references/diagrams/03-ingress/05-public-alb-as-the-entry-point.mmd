@@ -1,0 +1,4 @@
+flowchart LR
+    client3["Internet client"] --> alb["Public ALB"]
+    alb -->|Backend allows the ALB security group| targets["Private backend targets"]
+    linkStyle default stroke:#64748b,stroke-width:2px

@@ -1,0 +1,6 @@
+flowchart LR
+    client["Internet client"] --> proxy["Public reverse proxy"]
+    proxy -->|Loopback on the same host| local["Local app listener"]
+    proxy -->|Private network or WireGuard tunnel| remote["App on a separate host"]
+    client -. Direct request to backend .-> blocked["Blocked by listener binding or firewall"]
+    linkStyle default stroke:#64748b,stroke-width:2px

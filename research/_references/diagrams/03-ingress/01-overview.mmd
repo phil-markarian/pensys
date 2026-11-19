@@ -1,0 +1,5 @@
+flowchart LR
+    client["Internet client"] --> edge["Public entry point"]
+    edge -->|Routes by hostname or path| control["Backend ingress control"]
+    control -->|Allows approved traffic| app["Application backend"]
+    linkStyle default stroke:#64748b,stroke-width:2px

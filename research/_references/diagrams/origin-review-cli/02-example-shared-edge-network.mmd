@@ -1,0 +1,5 @@
+flowchart LR
+    network["Input: provider address filter from ingress export"] --> review["Compare with expected edge identity"]
+    policy["Input: operator policy for intended edge"] --> review
+    review --> result["Output: unresolved assessment with missing identity evidence"]
+    linkStyle default stroke:#64748b,stroke-width:2px

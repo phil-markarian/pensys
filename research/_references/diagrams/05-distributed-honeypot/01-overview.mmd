@@ -1,0 +1,6 @@
+flowchart LR
+    sensors["Decoys across locations"] --> events["Normalize events and retain sensor context"]
+    events --> patterns["Summarize recurring request patterns"]
+    patterns --> review["Engineer reviews relevance"]
+    inventory["Owned route, ingress, and dependency inventory"] --> review
+    review --> checks["Prioritize configuration review and regression checks"]

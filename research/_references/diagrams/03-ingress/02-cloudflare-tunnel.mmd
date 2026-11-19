@@ -1,0 +1,6 @@
+flowchart LR
+    client["Internet client"] --> edge["Cloudflare proxy"]
+    edge -->|Request over established tunnel| connector["cloudflared connector"]
+    connector --> app["Private application listener"]
+    connector -. Initiates outbound tunnel .-> edge
+    linkStyle default stroke:#64748b,stroke-width:2px

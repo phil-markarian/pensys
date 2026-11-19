@@ -1,0 +1,5 @@
+flowchart LR
+    bundles["Input: versioned bundles from review tools"] --> format["Check schema version and structure"]
+    format --> refs["Check IDs, references, and scope"]
+    refs --> result["Output: validation errors and missing inputs"]
+    linkStyle default stroke:#64748b,stroke-width:2px

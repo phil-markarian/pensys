@@ -1,0 +1,14 @@
+flowchart TB
+    config["Source: cloud provider or reverse proxy"] -->|Import listener and routing export| ingress["Ingress Review"]
+    settings["Source: provider settings and operator policy"] -->|Import origin settings and allowed callers| origin["Origin Review"]
+    app["Source: framework route registry or existing route export"] -->|Import route records| routes["Route Mapper"]
+    ingress --> topology["Output: ingress topology bundle"]
+    origin --> controls["Output: origin assessment bundle"]
+    routes --> inventory["Output: application route bundle"]
+    topology -. Optional import .-> origin
+    topology -. Optional import .-> exposure["Exposure Review"]
+    controls -. Optional import .-> exposure
+    inventory -. Optional import .-> exposure
+    edge["Source: CDN, load balancer, or proxy logging destination"] -->|Import access log export| exposure
+    exposure --> report["Output: exposure report and coverage gaps"]
+    linkStyle default stroke:#64748b,stroke-width:2px

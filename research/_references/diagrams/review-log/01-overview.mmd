@@ -1,0 +1,6 @@
+flowchart LR
+    tools["Ingress, Origin, or Exposure Review"] --> events["Input: structured events emitted by each CLI"]
+    events --> log["Output: per-run JSON Lines log"]
+    tools --> evidence["Output from CLI: versioned evidence bundle"]
+    log -. Run ID links records .-> evidence
+    linkStyle default stroke:#64748b,stroke-width:2px

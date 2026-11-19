@@ -1,0 +1,9 @@
+flowchart TB
+    shared["Shared folder: reusable infrastructure snapshot"]
+    shared -. Explicit import .-> a["Workspace A: own scope and policy"]
+    shared -. Explicit import .-> b["Workspace B: own scope and policy"]
+    a --> ea["Output: Workspace A evidence history"]
+    b --> eb["Output: Workspace B evidence history"]
+    ea --> la["Current coverage ledger for A"]
+    eb --> lb["Current coverage ledger for B"]
+    linkStyle default stroke:#64748b,stroke-width:2px

@@ -1,0 +1,6 @@
+flowchart LR
+    events["Source: earlier Pensys invocation events"] --> definition["Input: versioned workflow selected by user"]
+    definition --> replay["Replay: choose pinned snapshots or fresh collection"]
+    replay --> run["Output: new run and evidence"]
+    run --> history["Append to run history"]
+    linkStyle default stroke:#64748b,stroke-width:2px

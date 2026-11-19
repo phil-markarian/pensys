@@ -1,0 +1,8 @@
+flowchart LR
+    provider["Source: provider API or proxy configuration"] --> collect["Collect: read-only adapter"]
+    collect --> snapshot["Input: configuration snapshot and manifest"]
+    export["Source: existing configuration export"] --> review["Review: compare configured and intended paths"]
+    snapshot --> review
+    policy["Input: operator ingress policy"] --> review
+    review --> output["Output: ingress evidence bundle"]
+    linkStyle default stroke:#64748b,stroke-width:2px

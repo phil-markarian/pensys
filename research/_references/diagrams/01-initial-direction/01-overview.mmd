@@ -1,0 +1,11 @@
+flowchart LR
+    source["Application source"] --> routes["Route and permission inventory"]
+    config["Ingress configuration"] --> review["Engineer reviews evidence"]
+    staging["Human-led checks on owned software"] --> review
+    routes --> review
+    policy["Lean policy invariants"] --> review
+    review --> report["Report for engineers, CI, and AI"]
+    classDef evidence fill:#e0f2fe,stroke:#0369a1,color:#082f49
+    classDef outcome fill:#dcfce7,stroke:#15803d,color:#14532d
+    class source,config,staging,policy evidence
+    class review,report outcome

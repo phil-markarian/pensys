@@ -1,0 +1,7 @@
+flowchart LR
+    source["Source: existing framework route inventory or API specification"]
+    source -->|Import route records| mapper["Route Mapper: normalize and cite"]
+    checkout["Fallback source: application checkout"] -. Extract unavailable fields .-> mapper
+    mapper --> bundle["Output: versioned route evidence bundle"]
+    bundle -. Optional import .-> exposure["Exposure Review"]
+    linkStyle default stroke:#64748b,stroke-width:2px

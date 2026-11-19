@@ -1,0 +1,4 @@
+flowchart LR
+    edge["CloudFront"] -->|Signed origin request| bucket["Private S3 bucket"]
+    bucket -->|Bucket policy allows the distribution| objects["Static assets"]
+    linkStyle default stroke:#64748b,stroke-width:2px

@@ -1,0 +1,6 @@
+flowchart LR
+    original["Source: original assessment and citations"] --> history["Append-only evidence history"]
+    correction["Input: new assessment cites the earlier record"] --> history
+    history --> current["Output: current coverage ledger"]
+    history --> trace["Output: trace shows both records"]
+    linkStyle default stroke:#64748b,stroke-width:2px

@@ -1,0 +1,4 @@
+flowchart LR
+    edge["External Application Load Balancer"] -->|Cloud Run ingress allows load balancer traffic| run["Cloud Run service"]
+    client["Internet client"] -. Direct request to default URL .-> deny["Blocked by ingress policy"]
+    linkStyle default stroke:#64748b,stroke-width:2px
