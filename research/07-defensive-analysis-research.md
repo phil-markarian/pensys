@@ -27,6 +27,8 @@ flowchart LR
 
 ## First comparison to run
 
+See the [policy verification benchmark design](08-policy-verification-design.md) for the Lean model and comparison harness.
+
 **Candidate:** Start with one tenant-isolation policy and one ingress topology, both captured in offline fixtures.[^local] Compare a documented manual review with a report assembled from native exports and existing regression outcomes. Include a complete snapshot, an intentionally incomplete export, and a new revision that changes the expected assessment.
 
 Measure which review questions can be answered, false alarms against labeled examples, and time to verify citations. Track cases where the report correctly stays unresolved. Add Lean or AI-assisted analysis as separate comparisons after measuring that baseline.

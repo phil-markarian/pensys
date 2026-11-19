@@ -5,6 +5,7 @@ Pensys is the working name for a local security review suite for personal and te
 - [Project direction](research/01-initial-direction.md)
 - [Tool boundaries, commands, and workspace design](research/06-tool-boundaries-and-evidence.md)
 - [Defensive security analysis research](research/07-defensive-analysis-research.md)
+- [Policy and app benchmark design](research/08-policy-verification-design.md)
 - [Shared evidence schema and fixtures](schema/README.md)
 - [Reusable diagram library](research/_references/diagrams/README.md)
 

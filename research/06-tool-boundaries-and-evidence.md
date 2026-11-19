@@ -306,6 +306,8 @@ To add material to a snapshot, create a derived snapshot with a new UUIDv7. Reco
 
 Store personal workflows under a workspace's `workflows/` folder. Put reusable templates under `shared/workflows/` and keep workflow run records in the workspace that executed them.
 
+**Evidence Evaluate** is a proposed shared command for scoring review outcomes against an evaluation profile and recording decisions about what to improve.[^candidates] [Evidence Evaluate design](_tools/evidence-evaluate/README.md)
+
 ## Candidate entry points
 
 **Authorization Review and Asset Inventory** are proposals.[^candidates]
