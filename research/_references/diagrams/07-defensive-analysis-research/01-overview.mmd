@@ -1,0 +1,7 @@
+flowchart LR
+    papers["Source: published studies and preprints"] --> review["Review: compare methods and evidence"]
+    review --> candidate["Output: candidate Pensys check"]
+    baseline["Input: labeled local examples and existing reports"] --> evaluation["Evaluate: coverage, accuracy, and review time"]
+    candidate --> evaluation
+    evaluation --> decision["Output: adopt, revise, or defer"]
+    linkStyle default stroke:#64748b,stroke-width:2px

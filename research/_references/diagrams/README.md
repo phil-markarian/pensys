@@ -93,3 +93,7 @@ From the repository root, run `./tool sync_diagrams` after editing a source. Run
 
 - [Overview](schema/01-overview.mmd)
 - [Example: origin identity is unresolved](schema/02-example-origin-identity-is-unresolved.mmd)
+
+## Defensive security analysis research
+
+- [Overview](07-defensive-analysis-research/01-overview.mmd)
