@@ -171,7 +171,7 @@ Bind the app to a private or tunnel interface, or restrict its firewall to the p
 
 ## What the review tool should check
 
-- Map each public listener to an owner, backend, and intended control. Include provider-generated names, staging deployments, IPv6 listeners, and published container ports.
+- Use the public listener-to-backend map from [Ingress Review](_tools/ingress-review-cli/README.md) to identify each origin, its owner, and the expected caller controls. Include provider-generated names, staging deployments, IPv6 listeners, and published container ports.
 - Check that a direct public path cannot reach the same backend outside the intended edge. Compare deployed firewall and listener rules with infrastructure-as-code.
 - Record where edge identity is enforced. Provider-wide IP ranges establish network source, while distribution-specific credentials or provider-enforced private connectivity can establish a narrower trust boundary.
 - Flag controls based only on an unpublished hostname, an HTTP Host header, or an application port left publicly reachable behind a proxy. Track edge-to-origin TLS, origin access restrictions, and user authorization as separate controls.

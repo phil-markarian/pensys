@@ -8,6 +8,8 @@ Validate each bundle against the schema at import and export. When combining bun
 
 The v1 structure is implemented. **Workspace metadata, structured snapshot provenance, and coverage-ledger history** are design extensions.[^extensions]
 
+See the [Pensys glossary](../research/glossary.md) for the distinction between coverage, readiness, and assessment.
+
 See [Schema patterns from Trace and security-audit-skill](../research/_tools/schema/README.md).
 
 [^extensions]: See the [suite design](../research/06-tool-boundaries-and-evidence.md#schema) for the target contract. Cross-bundle checks belong in the planned [Evidence Validate command](../research/_tools/evidence-validate/README.md).

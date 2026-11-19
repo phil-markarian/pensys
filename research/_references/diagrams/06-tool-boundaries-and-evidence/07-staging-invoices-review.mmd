@@ -1,0 +1,7 @@
+flowchart LR
+    first["Input: stage routes, gateway export, and logs"] --> review["Run 1: review reachability"]
+    review --> gap["Output: unresolved because network rules are missing"]
+    followup["New input: scoped firewall and private access export"] --> second["Run 2: re-review with added evidence"]
+    gap --> second
+    second --> history["Output: new assessment linked to earlier evidence"]
+    linkStyle default stroke:#64748b,stroke-width:2px

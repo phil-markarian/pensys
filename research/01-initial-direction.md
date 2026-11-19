@@ -1,5 +1,7 @@
 # Initial direction
 
+Pensys is a planned local security review suite for personal and team projects. It brings source, configuration, and review evidence together so an engineer can verify what each result supports.
+
 ```mermaid
 flowchart LR
     source["Application source"] --> routes["Route and permission inventory"]

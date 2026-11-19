@@ -13,6 +13,18 @@ flowchart LR
 [Mermaid source](_references/diagrams/03-ingress/01-overview.mmd)
 
 
+## Common paths and evidence
+
+| Setup | Public entry point | Boundary to review |
+| --- | --- | --- |
+| Cloudflare | Cloudflare proxy | With Cloudflare Tunnel, the connector establishes an outbound connection. Check whether any origin listener is also publicly reachable. |
+| AWS | CloudFront or an internet-facing Application Load Balancer (ALB) | CloudFront can use a private VPC origin. A public ALB can be the intended entry point, with backend security groups allowing traffic from the ALB. |
+| Google Cloud (GCP) | External Application Load Balancer | For Cloud Run, check the service ingress policy and whether the default service URL provides another public path. |
+| Azure | Azure Front Door | Check Private Link for supported origins or the access restrictions on public origins. |
+| Other CDNs, such as Fastly | CDN edge | Check how the backend verifies traffic from the edge, for example with mutual TLS. |
+| Self-managed | NGINX, Caddy, or HAProxy | A backend can listen on loopback, a private network, or a tunnel. Check listener bindings, firewall rules, and published container ports. |
+
+
 ## Detailed ingress paths
 
 ### Cloudflare Tunnel
@@ -143,19 +155,6 @@ flowchart LR
 
 [NGINX reverse proxy module](https://nginx.org/en/docs/http/ngx_http_proxy_module.html), [WireGuard quick start](https://www.wireguard.com/quickstart/)
 
-## Common setups
-
-| Setup | Public entry point | Boundary to review |
-| --- | --- | --- |
-| Cloudflare | Cloudflare proxy | With Cloudflare Tunnel, the connector establishes an outbound connection. Check whether any origin listener is also publicly reachable. |
-| AWS | CloudFront or an internet-facing Application Load Balancer (ALB) | CloudFront can use a private VPC origin. A public ALB can be the intended entry point, with backend security groups allowing traffic from the ALB. |
-| Google Cloud (GCP) | External Application Load Balancer | For Cloud Run, check the service ingress policy and whether the default service URL provides another public path. |
-| Azure | Azure Front Door | Check Private Link for supported origins or the access restrictions on public origins. |
-| Other CDNs, such as Fastly | CDN edge | Check how the backend verifies traffic from the edge, for example with mutual TLS. |
-| Self-managed | NGINX, Caddy, or HAProxy | A backend can listen on loopback, a private network, or a tunnel. Check listener bindings, firewall rules, and published container ports. |
-
 For each deployment, record the expected hostname, public listener, routes, backends, and owner. Compare those expectations with deployed DNS, routing rules, and backend access controls. Include provider-generated hostnames and staging environments when looking for additional entry points.
 
-See [Origin protection controls](04-origin-protection-controls.md) for details and provider documentation, and the [Exposure Review CLI](_tools/exposure-review-cli/README.md) for how the tool would compare intended and deployed ingress.
-
-The [Ingress Review CLI design](_tools/ingress-review-cli/README.md) describes how to check these paths against deployed configuration.
+[Origin protection controls](04-origin-protection-controls.md) explains which callers a backend should accept. The [Ingress Review CLI](_tools/ingress-review-cli/README.md) compares intended and configured paths, and [Edge Traffic Review](_tools/edge-traffic-review/README.md) can correlate that evidence with traffic.

@@ -11,11 +11,11 @@ flowchart TB
     origin --> controls["Output: origin assessment bundle"]
     routes --> inventory["Output: application route bundle"]
     topology -. Optional import .-> origin
-    topology -. Optional import .-> exposure["Exposure Review"]
+    topology -. Optional import .-> exposure["Edge Traffic Review"]
     controls -. Optional import .-> exposure
     inventory -. Optional import .-> exposure
     edge["Source: CDN, load balancer, or proxy logging destination"] -->|Import access log export| exposure
-    exposure --> report["Output: exposure report and coverage gaps"]
+    exposure --> report["Output: edge traffic report and coverage gaps"]
     linkStyle default stroke:#64748b,stroke-width:2px
 ```
 
@@ -29,13 +29,43 @@ Prefer existing framework inventories, provider exports, and access logs. Each a
 | --- | --- | --- |
 | Ingress Review | Parsing provider configuration, mapping listeners to backends, and comparing configured network paths with intended ingress. | The app listens on all IPv4 interfaces. Public reachability is unresolved because firewall evidence is missing. |
 | Origin Review | Evaluating origin controls against the intended edge identity and permitted sources. | The network filter is configured. Enforcement of the intended edge identity remains unresolved. |
-| Exposure Review | Parsing and aggregating traffic, matching events to routes, and correlating them with available ingress and origin evidence. | The gateway forwarded a request for an unlisted path. The response status leaves the content uncertain. |
+| Edge Traffic Review | Parsing and aggregating traffic, matching events to routes, and correlating them with available ingress and origin evidence. | The gateway forwarded a request for an unlisted path. The response status leaves the content uncertain. |
 | Route Mapper | Extracting application routes from source or explicit exports and recording unresolved registrations. | An HTTP method and route template map to a handler at a specific revision. |
 | Schema | Versioned record definitions and compatibility rules for producers and consumers. | A bundle identifies its producer, target scope, evidence records, and coverage gaps. |
 
-Ingress Review describes configured paths. Origin Review evaluates whether those paths and the available origin controls enforce the expected trust boundary. Application permission checks belong with **Authorization Review** if that package is adopted.[^candidates] Exposure Review can cite results from either when they are relevant to an observed event.
+Ingress Review describes configured paths. Origin Review evaluates whether those paths and the available origin controls enforce the expected trust boundary. Application permission checks belong with **Authorization Review** if that package is adopted.[^candidates] Edge Traffic Review can cite results from either when they are relevant to an observed event.
 
-Route Mapper and Ingress Review can run independently. Origin Review can use already supplied evidence, and Exposure Review can summarize traffic with missing supporting bundles. The arrows show optional evidence exchange between tools. Origin Review starts as a single evaluator with its own command. If it uses the same inputs and rules as Ingress Review, the two commands can ship in one package.
+Route Mapper and Ingress Review can run independently. Origin Review can use already supplied evidence, and Edge Traffic Review can summarize traffic with missing supporting bundles. The arrows show optional evidence exchange between tools. Origin Review starts as a single evaluator with its own command. If it uses the same inputs and rules as Ingress Review, the two commands can ship in one package.
+
+## How to read this design
+
+Use the [Pensys glossary](glossary.md) for artifact names and status definitions.
+
+- Follow the [worked review](#worked-example-staging-invoices-api) to see the artifacts in use.
+- See [Schema](#schema), the [CLI wrapper](#cli-wrapper-by-analysis-perspective), and [Collection and review](#collection-and-review) for tool interfaces.
+- See [Evidence readiness](#evidence-readiness) and the [review workspace](#review-workspace) for coverage and history.
+
+## Worked example: staging invoices API
+
+**Illustrative review.**[^implementation] It follows the staging service in [Internet exposure](02-internet-exposure.md#example-staging-invoices-api).
+
+```mermaid
+flowchart LR
+    first["Input: stage routes, gateway export, and logs"] --> review["Run 1: review reachability"]
+    review --> gap["Output: unresolved because network rules are missing"]
+    followup["New input: scoped firewall and private access export"] --> second["Run 2: re-review with added evidence"]
+    gap --> second
+    second --> history["Output: new assessment linked to earlier evidence"]
+    linkStyle default stroke:#64748b,stroke-width:2px
+```
+
+[Mermaid source](_references/diagrams/06-tool-boundaries-and-evidence/07-staging-invoices-review.mmd)
+
+1. The operator imports an application route export, deployed gateway configuration, and gateway logs. Route Mapper publishes the registered invoice route with a source reference. Ingress Review maps the gateway to the backend, but flags public reachability as unresolved because the network rules are missing.
+2. Edge Traffic Review correlates observed requests with the route and gateway evidence. The logs show activity at that gateway. A certificate log can supply separate evidence that the hostname is visible. The report keeps that observation, the route match, and unresolved reachability as separate claims.
+3. The operator adds the scoped firewall and private-access exports in a derived snapshot. A new Ingress Review assessment can support a configured VPN-only path if the combined configuration covers all relevant entry points. Observed connectivity requires its own evidence. The coverage ledger shows the current assessment while retaining the first run and its missing-input record.
+
+The application’s tenant policy is a separate question. The [policy benchmark](08-policy-verification-design.md) compares expected access with application regression evidence.
 
 ## Schema
 
@@ -50,7 +80,7 @@ The table describes the target contract. The implemented [v1 bundle schema](../s
 
 Use JSON and JSON Schema for the initial interchange. Cross-bundle evidence references use a bundle ID and record ID. Correlate resources within the same project and environment using provider-scoped identifiers or explicit mappings. Match traffic using available host, method, route, and time evidence. Preserve ambiguity when multiple matches are possible. Keep raw configuration and sensitive log fields out of the shared bundle by default and cite the source or record location instead.
 
-For example, Ingress Review can export the observed binding and its unresolved reachability assessment. Exposure Review can cite both records when explaining an edge event. A missing ingress bundle still allows a traffic summary, with ingress coverage marked as unavailable.
+For example, Ingress Review can export the observed binding and its unresolved reachability assessment. Edge Traffic Review can cite both records when explaining an edge event. A missing ingress bundle still allows a traffic summary, with ingress coverage marked as unavailable.
 
 Trace is the precedent for normalizing imports, preserving provenance, and making inferred relationships reviewable. The audit skill's coverage ledger is the precedent for recording what a run actually examined. [Trace import model](https://github.com/phil-markarian/Trace/blob/7b49d40e0edfefc3b8fab450496f6af0bc68df42/src/services/import/types.ts), [Security audit workflow](https://github.com/phil-markarian/security-audit-skill/blob/c1c8a8c1471069fb0e188eeaff69b8e8db6564a8/README.md)
 
@@ -70,8 +100,8 @@ flowchart TB
     externalSource -->|Import observation export| external["pensys external"]
     internal --> bundles["Output: versioned evidence bundle"]
     external --> bundles
-    bundles -->|Import saved bundles| evidence["pensys evidence: validate or diff"]
-    evidence --> report["Output: validation results or changes"]
+    bundles -->|Import saved bundles| evidence["pensys evidence: shared commands"]
+    evidence --> report["Output: validation, changes, or evidence references"]
     linkStyle default stroke:#64748b,stroke-width:2px
 ```
 
@@ -82,11 +112,12 @@ flowchart TB
 | `pensys internal routes` | Map source or route exports to handlers. |
 | `pensys internal ingress` | Review deployed ingress configuration. |
 | `pensys internal origin` | Review configured origin controls. |
+| `pensys internal traffic` | Summarize operator-side access logs and correlate them with available evidence. |
 | `pensys external visibility` | Review public DNS, certificate records, and client-visible evidence for owned assets. |
 | `pensys external reachability` | Review approved connectivity evidence from a specified public network, VPN, or service context. |
 | `pensys evidence validate` and `pensys evidence diff` | Validate and compare bundles from either perspective. |
 
-Exposure Review correlates operator-side logs with available route, ingress, and origin evidence. A **suite-level `pensys review`** could also combine separately supplied client observations with those bundles.[^candidates] Edge logs are operator-side evidence of client traffic. Record the evidence source and observation context so a report can distinguish an operator's log from what a client received.
+Edge Traffic Review correlates operator-side logs with available route, ingress, and origin evidence. A **suite-level `pensys review`** could also combine separately supplied client observations with those bundles.[^candidates] Edge logs are operator-side evidence of client traffic. Record the evidence source and observation context so a report can distinguish an operator's log from what a client received.
 
 A vulnerability is a finding that can emerge from either perspective. A penetration test can also start from an authenticated session, a VPN, or other internal network access. The command names describe the evidence perspective. Authorization and test scope apply independently.
 
@@ -121,18 +152,24 @@ pensys internal ingress review --workspace storefront --environment staging --in
 
 Standardize the manifest first. Add read-only connectors incrementally as each source is supported.
 
-## Input sufficiency
+## Evidence readiness
 
-Assess sufficiency per review question. A readable export can support one conclusion while leaving another unresolved. The owning review tool defines the evidence it needs. Evidence Validate checks the bundle and its references. Review reports use consistent labels for the resulting coverage.
+Assess evidence readiness per review question. A readable export can support one conclusion while leaving another unresolved. The owning review tool defines the evidence it needs. Evidence Validate checks the bundle and its references. Report readiness and its reason separately from input coverage and assessment status.
 
-| Signal | Example | What to do next |
-| --- | --- | --- |
-| Sufficient | An ALB export identifies a listener rule and its target group for the reviewed environment. | Use the export for that topology claim. |
-| Partial | Access logs show method, path, and status but omit whether the edge forwarded the request. | Report traffic counts. Use backend or gateway evidence to assess forwarding. |
-| Missing or inaccessible | Logging was disabled, the requested window was not retained, or the collector lacked permission. | Report the specific cause. Enable, retrieve, or request the appropriate existing source. |
-| Stale or out of scope | The export is from a different environment, deployment revision, or time window. | Collect a comparable snapshot before making the claim. |
-| Unsupported format | The upstream export contains the needed fields, but Pensys cannot read that format. | Add or extend an import adapter. Reuse the upstream exporter. |
-| Upstream gap | Existing route exports omit HTTP methods and no scoped API specification is available. | Check the framework registry or another existing exporter. Build a narrow extractor if those sources cannot supply the missing evidence. |
+| Readiness | Meaning |
+| --- | --- |
+| Sufficient | The evidence supports answering the scoped question. |
+| Partial | The evidence answers part of the question. For example, access logs show request counts while forwarding remains unresolved. |
+| Insufficient | The evidence cannot support an answer to the question. |
+
+| Reason | What to do next |
+| --- | --- |
+| Missing input | Retrieve the export or enable collection if the source was never captured. |
+| Access denied | Obtain the export through an authorized account or ask the source owner. |
+| Stale | Collect a snapshot for the relevant revision or time window. |
+| Out of scope | Supply evidence for the correct project, environment, or resource. |
+| Import format unsupported | Add or extend the importer if the export already contains the required fields. |
+| Source omits required data | Look for a richer existing source. Build a narrow extractor if one is needed. |
 
 Show the review question, source, covered scope and time window, missing fields or records, and the suggested next input. Record known sampling, truncation, or redaction when it affects the claim. Treat a missing or incomplete log window as a coverage gap even if it contains zero matching requests. Evidence Diff should carry these signals forward so a loss of coverage cannot look like a resolved finding.
 
@@ -141,7 +178,7 @@ Show the review question, source, covered scope and time window, missing fields 
 - [Evidence Validate](_tools/evidence-validate/README.md): Check bundle structure, record references, and project and environment scope before combining evidence.
 - [Evidence Diff](_tools/evidence-diff/README.md): Compare compatible runs and report changes in observations, assessments, and coverage. When an input is missing, mark the affected result as no longer evaluable rather than resolved.
 
-Validate and Diff are the first shared commands. They operate on evidence bundles from any package. A later `pensys evidence trace <assessment-id>` command will follow citations and show which inputs are missing.
+Validate and Diff are the first shared commands. They operate on evidence bundles from any package. A later `pensys evidence trace <bundle-id> <record-id>` command will follow citations and show which inputs are missing.
 
 **Evidence Evaluate** is a proposed shared command for scoring review outcomes against an evaluation profile and recording decisions about what to improve.[^candidates] [Evidence Evaluate design](_tools/evidence-evaluate/README.md)
 
@@ -304,7 +341,7 @@ Let an operator select steps from the history and save a named, versioned workfl
 
 Invocation capture and the choice between pinned inputs and fresh collection are agreed. To adjust a workflow, save a new revision or branch that records its parent revision. It can reuse pinned inputs and reorder, add, or replace steps. Keep past runs tied to the exact workflow revision and snapshot IDs they used.
 
-To add material to a snapshot, create a derived snapshot with a new UUIDv7. Record its parent, added files, and any explicit overrides used by the new review. Preserve the source, scope, and collection time of each input. For example, extend a Django route listing with an OpenAPI export and rerun Route Mapper using the derived snapshot. The earlier snapshot still reproduces the earlier review.
+To add material to a snapshot, create a derived snapshot with a new UUIDv7. Record its parent, added files, and any explicit overrides used by the new review. Preserve the source, scope, and collection time of each input. For example, extend an application route listing with an OpenAPI export and rerun Route Mapper using the derived snapshot. The earlier snapshot still reproduces the earlier review.
 
 Store personal workflows under a workspace's `workflows/` folder. Put reusable templates under `shared/workflows/` and keep workflow run records in the workspace that executed them.
 
@@ -318,7 +355,7 @@ Store personal workflows under a workspace's `workflows/` folder. Put reusable t
 ## Related designs
 
 - [Ingress Review CLI](_tools/ingress-review-cli/README.md)
-- [Exposure Review CLI](_tools/exposure-review-cli/README.md)
+- [Edge Traffic Review](_tools/edge-traffic-review/README.md)
 - [Origin Review CLI](_tools/origin-review-cli/README.md)
 - [Shared review log](_tools/review-log/README.md)
 - [Route Mapper](_tools/route-mapper/README.md)

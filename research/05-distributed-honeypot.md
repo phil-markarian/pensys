@@ -21,9 +21,9 @@ flowchart LR
 - Start with existing edge logs and a route inventory. Compare aggregate traffic categories with known routes and intended ingress. Keep common events such as missing routes distinct from cases where a route or sensitive file was unexpectedly served.
 - If we later add a decoy, decide what question its data should answer. Keep it isolated from the services being protected and restrict egress. Collect only the fields needed for the question, since raw headers and bodies can contain credentials or personal data.
 
-## Connection to the Exposure Review CLI
+## Connection to the Edge Traffic Review
 
-Generic probes observed by the honeypot inform how the CLI groups edge traffic. The CLI compares those request patterns with our deployed ingress and route inventory so engineers can review evidence of unexpected exposure. Future honeypot summaries could provide an additional, separately labeled source. [Exposure Review CLI](_tools/exposure-review-cli/README.md)
+Generic probes observed by the honeypot inform how the CLI groups edge traffic. The CLI compares those request patterns with our deployed ingress and route inventory so engineers can review evidence of unexpected exposure. Future honeypot summaries could provide an additional, separately labeled source. [Edge Traffic Review](_tools/edge-traffic-review/README.md)
 
 ## References
 

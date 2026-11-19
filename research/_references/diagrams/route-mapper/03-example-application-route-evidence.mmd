@@ -1,0 +1,6 @@
+flowchart LR
+    app["Source: application route registry"] --> exporter["Existing exporter: framework route listing"]
+    exporter -->|Import listing| mapper["Route Mapper"]
+    spec["Source: existing OpenAPI export"] -. Optional method evidence .-> mapper
+    mapper --> bundle["Output: cited routes and unknown fields"]
+    linkStyle default stroke:#64748b,stroke-width:2px

@@ -1,6 +1,6 @@
 # How infrastructure and endpoints become visible
 
-An exposure review asks three questions about a service. Gather evidence for each and record who owns the relevant controls.
+A service exposure review asks three questions about a service. Gather evidence for each and record who owns the relevant controls.
 
 ```mermaid
 flowchart TD
@@ -85,4 +85,4 @@ Review the server-side permission check for the requested action and resource. A
 | Reachability | A caller on the public internet cannot connect to the private gateway. A user on an authorized VPN can connect if ingress rules allow it. | Platform or networking. |
 | Authorization | A signed-in user from tenant A can reach the API, and the backend denies access to tenant B's invoice. | Backend for enforcement. Product or data owner for policy. |
 
-For a personal project, one person may own all three layers. For a team deployment, record the actual owner for each layer. The [Exposure Review CLI design](_tools/exposure-review-cli/README.md) shows how to bring the evidence together.
+For a personal project, one person may own all three layers. For a team deployment, record the actual owner for each layer. The [Edge Traffic Review design](_tools/edge-traffic-review/README.md) shows how operator-side access logs can be correlated with route, ingress, and origin evidence.

@@ -25,7 +25,7 @@ flowchart LR
 | Pattern | What to borrow | Where it belongs |
 | --- | --- | --- |
 | Review workspace | Trace keeps a local case and supports exporting it. Define a project manifest that lists scope and bundle locations so a review can be reopened or shared. | Agreed for the [suite wrapper](../../06-tool-boundaries-and-evidence.md#review-workspace). |
-| Evidence inspection | Trace lets readers follow relationships to their sources. Use `pensys evidence trace <assessment-id>` to follow citations to their source records and identify missing inputs. **Direct record lookup** is a possible extension.[^lookup] | Shared evidence commands, alongside Validate and Diff.  |
+| Evidence inspection | Trace lets readers follow relationships to their sources. Use `pensys evidence trace <bundle-id> <record-id>` to follow citations to their source records and identify missing inputs. **Direct record lookup** is a possible extension.[^lookup] | Shared evidence commands, alongside Validate and Diff.  |
 | Evidence freshness | The audit skill rechecks prior records when relevant source or conditions change. Track input revisions or snapshot IDs so Diff can show which earlier assessments need a fresh review. | Shared metadata and Evidence Diff. Keep the original assessment available as history. |
 
 [Trace workspace and case exports](https://github.com/phil-markarian/Trace/blob/7b49d40e0edfefc3b8fab450496f6af0bc68df42/README.md#local-first), [Trace read-only queries](https://github.com/phil-markarian/Trace/blob/7b49d40e0edfefc3b8fab450496f6af0bc68df42/docs/MCP.md), [Audit skill prior-run handling](https://github.com/phil-markarian/security-audit-skill/blob/c1c8a8c1471069fb0e188eeaff69b8e8db6564a8/skills/security-audit/RECONNAISSANCE.md#prior-run-input)
@@ -37,7 +37,7 @@ flowchart LR
     config["Input from Ingress Review: allowed provider range"] --> origin["Origin Review"]
     gap["Input: coverage records show missing identity settings"] --> origin
     origin --> result["Output: specific edge identity unresolved"]
-    result --> exposure["Exposure Review cites the assessment"]
+    result --> exposure["Edge Traffic Review cites the assessment"]
     linkStyle default stroke:#64748b,stroke-width:2px
 ```
 

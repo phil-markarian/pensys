@@ -20,7 +20,7 @@ flowchart LR
 
 ## Package boundary
 
-Ingress Review owns configuration parsing and topology, including listeners, routing, backend bindings, and network paths. Origin Review owns decisions about whether an origin's network restrictions and edge identity controls match policy. Ingress evidence can be supplied as a versioned file from the CLI or as a compatible local fixture. Exposure Review can correlate either tool's evidence with routes and observed traffic.
+Ingress Review owns configuration parsing and topology, including listeners, routing, backend bindings, and network paths. Origin Review owns decisions about whether an origin's network restrictions and edge identity controls match policy. Ingress evidence can be supplied as a versioned file from the CLI or as a compatible local fixture. Edge Traffic Review can correlate either tool's evidence with routes and observed traffic.
 
 Start with one control evaluator and offline exports. Provide `pensys internal origin` as a distinct command. If the evaluator ends up using the same inputs and rules as Ingress Review, ship both commands in one package while preserving their separate outputs. Record the origin, permitted edge, evidence for each required control, and any explicit exceptions such as private health checks or internal callers. Emit a supported assessment, a configuration mismatch, or an unresolved assessment with references to the underlying records. Treat configuration and observed runtime behavior as distinct evidence.
 

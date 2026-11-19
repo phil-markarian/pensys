@@ -56,6 +56,7 @@ From the repository root, run `./tool sync_diagrams` after editing a source. Run
 - [Coverage history and shared folders](06-tool-boundaries-and-evidence/04-coverage-history-and-shared-folders.mmd)
 - [Append-only evidence history](06-tool-boundaries-and-evidence/05-append-only-evidence-history.mmd)
 - [Command history and reusable workflows](06-tool-boundaries-and-evidence/06-command-history-and-reusable-workflows.mmd)
+- [Worked example: staging invoices API](06-tool-boundaries-and-evidence/07-staging-invoices-review.mmd)
 
 ## Evidence Diff
 
@@ -65,9 +66,9 @@ From the repository root, run `./tool sync_diagrams` after editing a source. Run
 
 - [Overview](evidence-validate/01-overview.mmd)
 
-## Exposure review CLI
+## Edge Traffic Review
 
-- [Overview](exposure-review-cli/01-overview.mmd)
+- [Overview](edge-traffic-review/01-overview.mmd)
 
 ## Ingress Review CLI
 
@@ -87,7 +88,7 @@ From the repository root, run `./tool sync_diagrams` after editing a source. Run
 
 - [Overview](route-mapper/01-overview.mmd)
 - [Example: nested route registration](route-mapper/02-example-nested-route-registration.mmd)
-- [Example: Django route evidence](route-mapper/03-example-django-route-evidence.mmd)
+- [Example: application route evidence](route-mapper/03-example-application-route-evidence.mmd)
 
 ## Schema patterns from Trace and security-audit-skill
 
@@ -107,6 +108,10 @@ From the repository root, run `./tool sync_diagrams` after editing a source. Run
 
 - [Overview](evidence-evaluate/01-overview.mmd)
 - [Manual policy evaluation](evidence-evaluate/02-manual-policy-evaluation.mmd)
+
+## How analysis tools reach conclusions
+
+- [Overview](09-how-analysis-works/01-overview.mmd)
 
 ## WordPress benchmark
 

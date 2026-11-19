@@ -6,7 +6,7 @@ A shared logging package records what happened during a tool run. It accepts str
 
 ```mermaid
 flowchart LR
-    tools["Ingress, Origin, or Exposure Review"] --> events["Input: structured events emitted by each CLI"]
+    tools["Ingress, Origin, or Edge Traffic Review"] --> events["Input: structured events emitted by each CLI"]
     events --> log["Output: per-run JSON Lines log"]
     tools --> evidence["Output from CLI: versioned evidence bundle"]
     log -. Run ID links records .-> evidence
@@ -33,7 +33,7 @@ Each event should include a timestamp, severity, tool name and version, run ID, 
 flowchart LR
     input["Input: provider or proxy origin export"] --> review["Origin Review"]
     review --> log["Log output: warning about missing edge identity input"]
-    review --> bundle["Bundle output: unresolved edge identity coverage"]
+    review --> bundle["Bundle output: missing identity settings and unresolved assessment"]
     linkStyle default stroke:#64748b,stroke-width:2px
 ```
 

@@ -6,9 +6,9 @@ flowchart TB
     origin --> controls["Output: origin assessment bundle"]
     routes --> inventory["Output: application route bundle"]
     topology -. Optional import .-> origin
-    topology -. Optional import .-> exposure["Exposure Review"]
+    topology -. Optional import .-> exposure["Edge Traffic Review"]
     controls -. Optional import .-> exposure
     inventory -. Optional import .-> exposure
     edge["Source: CDN, load balancer, or proxy logging destination"] -->|Import access log export| exposure
-    exposure --> report["Output: exposure report and coverage gaps"]
+    exposure --> report["Output: edge traffic report and coverage gaps"]
     linkStyle default stroke:#64748b,stroke-width:2px

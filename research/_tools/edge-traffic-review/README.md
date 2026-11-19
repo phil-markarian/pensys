@@ -1,4 +1,4 @@
-# Exposure review CLI
+# Edge Traffic Review
 
 **Design status: planned.**[^tool-status]
 
@@ -13,16 +13,15 @@ flowchart LR
     ingress["Optional input: topology from Ingress Review"] -.-> review
     origin["Optional input: assessments from Origin Review"] -.-> review
     routes["Optional input: Route Mapper bundle or local manifest"] -.-> review
-    review --> report["Output: exposure report and coverage gaps"]
+    review --> report["Output: edge traffic report and coverage gaps"]
     linkStyle default stroke:#64748b,stroke-width:2px
 ```
 
-[Mermaid source](../../_references/diagrams/exposure-review-cli/01-overview.mmd)
+[Mermaid source](../../_references/diagrams/edge-traffic-review/01-overview.mmd)
 
-## Proposed package commands
+## Proposed command
 
-- `exposure traffic` summarizes edge and gateway logs by request pattern, status, and whether the request was forwarded when that evidence is available.
-- `exposure review` correlates traffic with available ingress, origin, and application route evidence. It highlights ingress assessments relevant to observed traffic, requests worth reviewing, and gaps in evidence.
+`pensys internal traffic` summarizes access logs by request pattern and response status. It reports forwarding when the logs show it. With optional inputs, it correlates traffic with ingress topology, origin assessments, and application routes. It highlights ingress assessments relevant to observed traffic, requests worth reviewing, and gaps in evidence.
 
 ## Provider inputs
 
@@ -35,7 +34,7 @@ Start with a local route manifest and log exports. **First cloud adapter: open.*
 
 ## First review report
 
-For each noteworthy request pattern, show the environment, edge, method, normalized route, count, time window, response evidence, and owner if known. A successful HTTP status alone leaves open what the response contained. Report possible unintended exposure separately from confirmed configuration findings and missing telemetry. Aggregate events without retaining request bodies, credentials, or query values by default.
+For each noteworthy request pattern, show the environment, edge, method, observed request path, matched application route if known, count, time window, response evidence, and owner if known. A successful HTTP status alone leaves open what the response contained. Report possible unintended exposure separately from confirmed configuration findings and missing telemetry. Aggregate events without retaining request bodies, credentials, or query values by default.
 
 ## Related notes
 
@@ -45,6 +44,8 @@ For each noteworthy request pattern, show the environment, edge, method, normali
 - [Ingress Review CLI](../ingress-review-cli/README.md)
 - [Tool boundaries and shared evidence](../../06-tool-boundaries-and-evidence.md)
 - [Route Mapper](../route-mapper/README.md)
+
+See the [staging invoices review](../../06-tool-boundaries-and-evidence.md#worked-example-staging-invoices-api) for how this output is used.
 
 [^tool-status]: This page describes intended behavior. See [suite implementation status](../../06-tool-boundaries-and-evidence.md) for what is available today.
 

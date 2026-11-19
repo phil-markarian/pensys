@@ -1,6 +1,0 @@
-flowchart LR
-    app["Source: Django URLconf and included patterns"] --> exporter["Existing exporter: django-extensions show_urls"]
-    exporter -->|Import listing| mapper["Route Mapper"]
-    spec["Source: existing DRF OpenAPI export"] -. Optional method evidence .-> mapper
-    mapper --> bundle["Output: cited routes and unknown fields"]
-    linkStyle default stroke:#64748b,stroke-width:2px

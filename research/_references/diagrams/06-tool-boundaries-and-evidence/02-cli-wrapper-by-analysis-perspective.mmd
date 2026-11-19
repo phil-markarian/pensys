@@ -5,6 +5,6 @@ flowchart TB
     externalSource -->|Import observation export| external["pensys external"]
     internal --> bundles["Output: versioned evidence bundle"]
     external --> bundles
-    bundles -->|Import saved bundles| evidence["pensys evidence: validate or diff"]
-    evidence --> report["Output: validation results or changes"]
+    bundles -->|Import saved bundles| evidence["pensys evidence: shared commands"]
+    evidence --> report["Output: validation, changes, or evidence references"]
     linkStyle default stroke:#64748b,stroke-width:2px

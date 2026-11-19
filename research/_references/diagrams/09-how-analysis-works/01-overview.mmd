@@ -1,0 +1,7 @@
+flowchart LR
+    world["System under study"] --> source["Source: selected observations"]
+    source --> input["Input: retained data and provenance"]
+    input --> method["Analysis: apply rules and assumptions"]
+    question["Input: question and scope"] --> method
+    method --> result["Output: conclusion, limits, and next evidence"]
+    linkStyle default stroke:#64748b,stroke-width:2px

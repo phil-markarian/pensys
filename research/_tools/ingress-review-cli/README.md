@@ -28,8 +28,10 @@ flowchart LR
 
 The manifest says requests should enter through a public reverse proxy and the application should listen only on loopback. A deployed export shows that the application port is bound to all IPv4 interfaces. Report the binding mismatch. If firewall evidence is missing, leave public reachability unresolved.
 
-The [Exposure Review CLI](../exposure-review-cli/README.md) can consume the versioned ingress evidence bundle alongside edge logs and application routes. See [Ingress](../../03-ingress.md) for deployment patterns.
+The [Edge Traffic Review](../edge-traffic-review/README.md) can consume the versioned ingress evidence bundle alongside edge logs and application routes. See [Ingress](../../03-ingress.md) for deployment patterns.
 
 See [Tool boundaries and shared evidence](../../06-tool-boundaries-and-evidence.md) for the interchange contract.
+
+See the [staging invoices review](../../06-tool-boundaries-and-evidence.md#worked-example-staging-invoices-api) for how this output is used.
 
 [^tool-status]: This page describes intended behavior. See [suite implementation status](../../06-tool-boundaries-and-evidence.md) for what is available today.
