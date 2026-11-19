@@ -1,0 +1,7 @@
+flowchart LR
+    config["Source: pinned Gitea and proxy configuration"] --> review["Review: compare access expectations with evidence"]
+    api["Source: release-specific API description"] --> review
+    traffic["Source: proxy logs and application test results"] --> review
+    review --> bundle["Output: evidence bundle for each run"]
+    bundle --> diff["Compare: baseline and team access change"]
+    linkStyle default stroke:#64748b,stroke-width:2px

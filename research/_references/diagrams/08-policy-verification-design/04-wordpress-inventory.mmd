@@ -1,0 +1,5 @@
+flowchart LR
+    rest["Source: advertised WordPress REST index"] -->|Import client-visible routes| mapper["Route Mapper"]
+    server["Source: operator export of registered REST routes"] -->|Import server-side routes| mapper
+    mapper --> evidence["Output: cited inventories for core and plugin snapshots"]
+    linkStyle default stroke:#64748b,stroke-width:2px

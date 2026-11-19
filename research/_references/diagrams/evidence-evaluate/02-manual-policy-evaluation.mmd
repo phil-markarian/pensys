@@ -1,0 +1,5 @@
+flowchart LR
+    baseline["Input: pinned policy and application evidence"] --> manual["Evaluate: review decisions against policy labels"]
+    manual --> notes["Output: scores, coverage gaps, and reviewer notes"]
+    notes --> repeat["Re-evaluate after a change using the same inputs"]
+    linkStyle default stroke:#64748b,stroke-width:2px

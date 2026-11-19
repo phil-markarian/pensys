@@ -1,0 +1,9 @@
+flowchart TB
+    cases["Input: policy and normalized cases"] --> lean["Lean: checked evaluator"]
+    cases --> python["Python: baseline evaluator"]
+    lean -->|Export Boolean decisions| compare["Compare decisions"]
+    python --> compare
+    labels["Input: independent policy labels"] --> compare
+    app["Input: adapter-normalized application decisions"] --> compare
+    compare --> output["Output: agreement, mismatches, and coverage gaps"]
+    linkStyle default stroke:#64748b,stroke-width:2px

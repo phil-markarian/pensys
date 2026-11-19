@@ -1,0 +1,6 @@
+flowchart LR
+    runs["Source: review runs and evidence bundles"] -->|Import saved bundles| evaluate["Evaluate against a versioned profile"]
+    profile["Input: review questions and independent expectations"] --> evaluate
+    feedback["Optional input: reviewer decisions and effort"] -.-> evaluate
+    evaluate --> output["Output: scored results and follow-up decisions"]
+    linkStyle default stroke:#64748b,stroke-width:2px

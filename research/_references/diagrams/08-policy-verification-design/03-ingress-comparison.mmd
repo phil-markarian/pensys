@@ -1,0 +1,5 @@
+flowchart LR
+    config["Source: deployed ingress export"] --> review["Compare configured path with intent"]
+    policy["Input: intended listener and backend"] --> review
+    review --> output["Output: topology assessment or coverage gap"]
+    linkStyle default stroke:#64748b,stroke-width:2px
