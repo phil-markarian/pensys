@@ -2,6 +2,8 @@
 
 Pensys is the working name for a local security review suite for personal and team projects.
 
+[Roadmap](roadmap.md) records the next milestone and development sequence.
+
 ## Start here
 
 1. [Project direction](research/01-initial-direction.md) explains what Pensys is for.
