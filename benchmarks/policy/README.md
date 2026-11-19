@@ -2,7 +2,7 @@
 
 **Status: scaffolded.**[^status]
 
-Compare a Lean policy model and a Python baseline against independently labeled tenant-access cases and application evidence. Django is the first application adapter.
+Compare a Lean policy model and a Python baseline against independently labeled tenant-access cases and application evidence.
 
 Use `lean/` for the model and proofs, `fixtures/` for pinned synthetic inputs and expectations, and a root `profile.json` for scoring once the profile format is defined.
 

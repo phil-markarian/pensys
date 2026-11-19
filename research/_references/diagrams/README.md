@@ -101,11 +101,17 @@ From the repository root, run `./tool sync_diagrams` after editing a source. Run
 ## Policy verification benchmark design
 
 - [Overview](08-policy-verification-design/01-overview.mmd)
-- [Gitea evidence flow](08-policy-verification-design/02-gitea-evidence.mmd)
 - [Ingress comparison](08-policy-verification-design/03-ingress-comparison.mmd)
-- [WordPress route evidence](08-policy-verification-design/04-wordpress-inventory.mmd)
 
 ## Evidence Evaluate
 
 - [Overview](evidence-evaluate/01-overview.mmd)
 - [Manual policy evaluation](evidence-evaluate/02-manual-policy-evaluation.mmd)
+
+## WordPress benchmark
+
+- [Overview](benchmarks/wordpress/01-overview.mmd)
+
+## Gitea benchmark
+
+- [Overview](benchmarks/gitea/01-overview.mmd)

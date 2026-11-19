@@ -1,0 +1,34 @@
+{
+  "benchmarks": [
+    {
+      "id": "policy",
+      "application": "Invoice application fixture",
+      "status": "scaffolded",
+      "definition": "policy/README.md",
+      "planned_questions": [
+        "Does the policy model enforce tenant isolation?",
+        "Do observed application decisions agree with the labeled policy?"
+      ]
+    },
+    {
+      "id": "gitea",
+      "application": "Gitea",
+      "status": "scaffolded",
+      "definition": "apps/gitea/README.md",
+      "planned_questions": [
+        "Can the review connect application routes, ingress configuration, and edge traffic?",
+        "Can it explain a deliberate repository access policy change?"
+      ]
+    },
+    {
+      "id": "wordpress",
+      "application": "WordPress",
+      "status": "scaffolded",
+      "definition": "apps/wordpress/README.md",
+      "planned_questions": [
+        "Can the review distinguish advertised and registered REST routes?",
+        "Can it explain route inventory changes after adding a plugin?"
+      ]
+    }
+  ]
+}
