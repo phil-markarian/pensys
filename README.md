@@ -43,3 +43,9 @@ Finally to sum things up in as little words as possible, this project is based o
 **Suite commands are in design.**[^status] Run `./tool --help` for the repository scripts available today.
 
 [^status]: The repository currently includes the v1 bundle schema, example bundles, and Mermaid maintenance tooling.
+
+## License
+
+Original Pensys materials use the [PolyForm Noncommercial License 1.0.0](LICENSE). The [internal commercial use permission](COMMERCIAL-USE.md) allows unmodified standalone internal use and modifications solely for upstream contributions.
+
+The archived Certificate Transparency materials in `research/_references/` are third-party references. Their own terms apply. [Original Certificate Transparency page](https://certificate.transparency.dev/howctworks/)
