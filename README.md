@@ -1,4 +1,4 @@
-# analysis-pen-test
+# Tentative project name: Pensys
 
 Pensys is the working name for a local security review suite for personal and team projects.
 
