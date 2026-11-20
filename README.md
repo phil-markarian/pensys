@@ -10,7 +10,7 @@ Unbridled capitalism bad, science good
 
 A more serious TL;DR
 
-A security suite that has human led design and research with carefully considered AI implementations. In addition, this is a soft-wiki for security. Any and all contributions are welcome. Stealing for profit is bad. Making things for the betterment of humanity is good. The end.
+A security suite that has human led design and research with carefully measured and considered AI implementations (sometimes human too). In addition, this is a soft-wiki for security. Any and all contributions are welcome. Stealing for profit is bad. Making things for the betterment of humanity is good. The end.
 
 For those who can read good (Zoolander joke):
 
